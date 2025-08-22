@@ -25,15 +25,9 @@ def chart_1():
     category_options = df['product_category'].unique()
     category_filter = st.sidebar.multiselect("Select Product Category:", options=category_options, default=category_options)
 
-    min_date = df['created_at'].min().date()
-    max_date = df['created_at'].max().date()
-    date_range = st.sidebar.date_input("Select Created Date Range:", [min_date, max_date], min_value=min_date, max_value=max_date)
-
     filtered_df = df[
         (df['product_brand'].isin(brand_filter)) &
-        (df['product_category'].isin(category_filter)) &
-        (df['created_at'].dt.date >= date_range[0]) &
-        (df['created_at'].dt.date <= date_range[1])
+        (df['product_category'].isin(category_filter))
     ]
 
     # --- Hitung jumlah produk terjual per brand ---
